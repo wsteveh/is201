@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Wood | Résumé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --navy: #1a2744;
+            --gold: #c9a84c;
+            --light: #f8f6f1;
+            --mid: #e8e4dc;
+            --text: #2d2d2d;
+        }
+        body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--light); }
+        h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
+        .navbar { background-color: var(--navy) !important; }
+        .navbar-brand { color: var(--gold) !important; font-size: 1.5rem; }
+        .nav-link { color: rgba(255,255,255,0.85) !important; }
+        .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+        .page-header { background: linear-gradient(135deg, var(--navy) 0%, #2c3e6b 100%); color: white; padding: 50px 0 40px; text-align: center; }
+        .page-header h1 { color: var(--gold); font-size: 2.5rem; margin-bottom: 0.25rem; }
+        .page-header p { color: rgba(255,255,255,0.75); margin: 0; }
+        .resume-card { background: white; border-radius: 4px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); padding: 2rem; margin-bottom: 1.5rem; }
+        .section-label { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.3rem; border-bottom: 2px solid var(--gold); padding-bottom: 0.4rem; margin-bottom: 1.25rem; }
+        .timeline-item { padding-left: 1.5rem; border-left: 3px solid var(--mid); margin-bottom: 1.75rem; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -7px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .item-title { font-weight: 700; color: var(--navy); margin-bottom: 0.05rem; font-size: 1rem; }
+        .item-sub { color: #555; font-size: 0.9rem; margin-bottom: 0.35rem; }
+        .item-date { font-size: 0.82rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .item-list { margin-top: 0.4rem; margin-bottom: 0; font-size: 0.93rem; padding-left: 1.2rem; }
+        .item-list li { margin-bottom: 0.25rem; }
+        .skill-tag { background: var(--mid); color: var(--navy); font-weight: 600; border-radius: 2px; padding: 0.3rem 0.75rem; display: inline-block; margin: 0.25rem; font-size: 0.85rem; }
+        .skill-tag.highlight { background: var(--navy); color: var(--gold); }
+        .sidebar-card { background: var(--navy); color: white; border-radius: 4px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .sidebar-card h6 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        .sidebar-card a { color: var(--gold); text-decoration: none; }
+        .contact-row { margin-bottom: 0.6rem; font-size: 0.9rem; }
+        .contact-row i { width: 20px; color: var(--gold); }
+        footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 2rem 0; font-size: 0.9rem; text-align: center; }
+        footer a { color: var(--gold); text-decoration: none; }
+        .gpa-badge { display: inline-block; background: #eaf4ee; color: #2a7a4a; font-weight: 700; font-size: 0.8rem; padding: 0.15rem 0.55rem; border-radius: 2px; margin-left: 0.4rem; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Steven Wood</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="resume.html">Résumé</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutme.html">About Me</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Steven Wood</h1>
+            <p>Economics (Math double major) &bull; Brigham Young University &bull; Provo, UT 84602</p>
+        </div>
+    </div>
+
+    <div class="container py-5" id="top">
+        <div class="row g-4">
+            <div class="col-lg-8">
+
+                <!-- Education -->
+                <div class="resume-card" id="edu">
+                    <div class="section-label"><i class="bi bi-mortarboard-fill me-2"></i>Education</div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Expected Apr 2027</div>
+                        <div class="item-title">Brigham Young University <span class="gpa-badge">4.00 GPA</span></div>
+                        <div class="item-sub">Bachelor of Science &mdash; Economics, Mathematics (double major) &bull; Provo, UT</div>
+                        <ul class="item-list">
+                            <li>Relevant coursework: Applied Econometrics, Data Analysis in Stata, Linear Algebra with Python</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Apr 2022</div>
+                        <div class="item-title">BYU–Idaho &amp; Utah State University <span class="gpa-badge">3.96 GPA</span></div>
+                        <div class="item-sub">Bachelor of Science &mdash; Financial Economics / Business Administration &bull; Rexburg, ID / Logan, UT</div>
+                        <ul class="item-list">
+                            <li>Analyzed large datasets in R and applied hypothesis testing to real-world economic questions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Professional Experience -->
+                <div class="resume-card" id="exp">
+                    <div class="section-label"><i class="bi bi-briefcase-fill me-2"></i>Professional Experience</div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jan 2025 – Present</div>
+                        <div class="item-title">Research Assistant &mdash; BYU Strategy Department</div>
+                        <div class="item-sub">Dr. Nile Hatch &bull; Provo, UT</div>
+                        <ul class="item-list">
+                            <li>Researching Industrial Organization, extending the Hotelling Model to uncovered markets for entry strategy analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jan 2025 – Apr 2025</div>
+                        <div class="item-title">Teaching Assistant &mdash; BYU Economics Department</div>
+                        <div class="item-sub">Statistics for Economists &bull; Provo, UT</div>
+                        <ul class="item-list">
+                            <li>Graded papers and held 6 office hours per week to support student learning in statistical concepts</li>
+                            <li>Planned, administered, and recorded review sessions to comprehensively cover course material</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Aug 2024 – May 2025</div>
+                        <div class="item-title">AI Data Trainer &mdash; DataAnnotation</div>
+                        <div class="item-sub">Provo, UT (Remote)</div>
+                        <ul class="item-list">
+                            <li>Improved AI models by evaluating hundreds of responses across multiple quality dimensions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Research -->
+                <div class="resume-card" id="research">
+                    <div class="section-label"><i class="bi bi-journal-text me-2"></i>Research &amp; Projects</div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jan 2025 – Present</div>
+                        <div class="item-title">COVID-19 &amp; Housing Markets</div>
+                        <div class="item-sub">Independent Research Paper</div>
+                        <ul class="item-list">
+                            <li>Conducted county-level economic analysis by sourcing datasets, designing a model, and applying regression and causal inference to evaluate drivers of pandemic-era housing market changes</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jan 2025 – Present</div>
+                        <div class="item-title">LifeTrack Competitive Analytics</div>
+                        <div class="item-sub">Independent Research Paper</div>
+                        <ul class="item-list">
+                            <li>Designed and analyzed a pricing experiment using real survey data to model market demand and profitability for a niche productivity app pre-launch</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jan 2021 – Present</div>
+                        <div class="item-title">LifeTrack</div>
+                        <div class="item-sub">Founder (Remote)</div>
+                        <ul class="item-list">
+                            <li>Built a full web app in 3 months using Angular (JavaScript / TypeScript / HTML) with Git for version control</li>
+                            <li>Launched as a web-based business hosted on Google Firebase with integrated monthly payments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Volunteer -->
+                <div class="resume-card" id="vol">
+                    <div class="section-label"><i class="bi bi-people-fill me-2"></i>Volunteer Experience</div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Sep 2024 – Present</div>
+                        <div class="item-title">Economics Student Association Member &mdash; BYUSA</div>
+                        <div class="item-sub">Provo, UT</div>
+                        <ul class="item-list">
+                            <li>Engaged in workshops, research talks, and events to broaden economics knowledge and industry awareness</li>
+                            <li>Organized a summer activity group to foster student engagement and build community</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="item-date">Jun 2022 – Jul 2024</div>
+                        <div class="item-title">Full-Time Missionary &mdash; The Church of Jesus Christ of Latter-day Saints</div>
+                        <div class="item-sub">Boise, ID</div>
+                        <ul class="item-list">
+                            <li>Served 16 hours/day for 2 years; trained 20+ missionaries and led weekly councils on key performance metrics</li>
+                            <li>Planned schedules and managed teams to meet goals in a high-accountability environment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="resume-card" id="ski">
+                    <div class="section-label"><i class="bi bi-stars me-2"></i>Skills</div>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <h6 class="fw-bold text-muted text-uppercase" style="font-size:0.78rem;letter-spacing:.08em">Technical</h6>
+                            <span class="skill-tag highlight">Python</span>
+                            <span class="skill-tag highlight">R</span>
+                            <span class="skill-tag highlight">Stata</span>
+                            <span class="skill-tag highlight">Econometrics</span>
+                            <span class="skill-tag">Causal Inference</span>
+                            <span class="skill-tag">Regression Analysis</span>
+                            <span class="skill-tag">Linear Algebra</span>
+                            <span class="skill-tag">Angular / TypeScript</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Google Firebase</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="fw-bold text-muted text-uppercase" style="font-size:0.78rem;letter-spacing:.08em">Professional</h6>
+                            <span class="skill-tag">Applied Research</span>
+                            <span class="skill-tag">Statistical Modeling</span>
+                            <span class="skill-tag">Teaching &amp; Mentoring</span>
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Team Leadership</span>
+                            <span class="skill-tag">Entrepreneurship</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar-card">
+                    <h6>Connect</h6>
+                    <div class="contact-row"><i class="bi bi-linkedin"></i> <a href="https://www.linkedin.com/in/stevenhwood" target="_blank">stevenhwood</a></div>
+                    <div class="contact-row"><i class="bi bi-youtube"></i> <a href="https://www.youtube.com/@doggonomics" target="_blank">Doggonomics</a></div>
+                    <div class="contact-row"><i class="bi bi-geo-alt-fill"></i> Provo, UT 84602</div>
+                </div>
+
+                <div class="resume-card">
+                    <div class="section-label">Quick Nav</div>
+                    <div class="d-grid gap-2">
+                        <a href="#edu" class="btn btn-sm" style="background:var(--mid);color:var(--navy);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-mortarboard me-1"></i>Education</a>
+                        <a href="#exp" class="btn btn-sm" style="background:var(--mid);color:var(--navy);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-briefcase me-1"></i>Experience</a>
+                        <a href="#research" class="btn btn-sm" style="background:var(--mid);color:var(--navy);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-journal me-1"></i>Research &amp; Projects</a>
+                        <a href="#vol" class="btn btn-sm" style="background:var(--mid);color:var(--navy);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-people me-1"></i>Volunteer</a>
+                        <a href="#ski" class="btn btn-sm" style="background:var(--mid);color:var(--navy);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-stars me-1"></i>Skills</a>
+                        <a href="#top" class="btn btn-sm" style="background:var(--navy);color:var(--gold);font-weight:600;border-radius:2px;text-align:left"><i class="bi bi-arrow-up me-1"></i>Back to Top</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0">Steven Wood &nbsp;|&nbsp; &copy; 2026 &nbsp;|&nbsp;
+                <a href="https://www.linkedin.com/in/stevenhwood" target="_blank">LinkedIn</a> &nbsp;|&nbsp;
+                <a href="https://www.youtube.com/@doggonomics" target="_blank">Doggonomics</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggonomics — Economics for Everyone</title>
+    <!-- Custom scratch stylesheet — NO Bootstrap -->
+    <link rel="stylesheet" href="styles/scratch.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Merriweather+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== Navigation div ===== -->
+    <div id="top-nav">
+        <a href="index.html" class="nav-brand">Steven Wood</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="resume.html">Résumé</a>
+            <a href="aboutme.html">About Me</a>
+            <a href="game.html">Inflation Survivor ↗</a>
+        </div>
+    </div>
+
+    <!-- ===== Hero div ===== -->
+    <div id="hero">
+        <div class="hero-inner">
+            <div class="channel-label">A YouTube Channel by Steven Wood</div>
+            <h1><span>Doggo</span>nomics</h1>
+            <p>Making economics clear, compelling, and actually fun — one video at a time.</p>
+            <a href="https://www.youtube.com/@doggonomics" target="_blank" class="btn-red">Watch on YouTube →</a>
+        </div>
+    </div>
+
+    <!-- ===== Main Content div ===== -->
+    <div id="content">
+
+        <!-- What is Doggonomics -->
+        <div class="section-block" id="about">
+            <h2 class="section-title">What is Doggonomics?</h2>
+            <hr class="section-rule">
+            <div class="content-card">
+                <p>Economics shapes everything — housing prices, your salary, the cost of groceries, how companies compete. But most people never encounter it outside of a dry textbook. <strong>Doggonomics</strong> is my attempt to fix that.</p>
+                <p style="margin-top:1rem">I'm Steven Wood, an Economics and Mathematics student at BYU with a passion for making rigorous ideas accessible. On Doggonomics, I break down real economic concepts — from supply and demand to causal inference — in a way that's engaging for anyone, whether you've taken economics before or never thought about it at all.</p>
+            </div>
+        </div>
+
+        <!-- Channel Image -->
+        <div class="section-block" id="channel">
+            <h2 class="section-title">The Channel</h2>
+            <hr class="section-rule">
+            <a href="#about" class="jump-link">↑ Back to top of page</a>
+            <img
+                src="images/doggonomics_icon_trans.png"
+                alt="YouTube Logo"
+                class="channel-img"
+                style="max-width:320px;display:block;margin:1.25rem auto 0;background:turquoise;padding:1.5rem;border-radius:8px;">
+            <p class="img-caption">Find Doggonomics at <a href="https://www.youtube.com/@doggonomics" target="_blank" style="color:#ff4444">youtube.com/@doggonomics</a></p>
+        </div>
+
+        <!-- Topics Covered — nested list -->
+        <div class="section-block" id="topics">
+            <h2 class="section-title">Topics I Cover</h2>
+            <hr class="section-rule">
+            <div class="content-card">
+                <p style="margin-bottom:1.25rem;color:var(--muted)">The channel spans the big ideas in economics, organized into four main areas:</p>
+                <!-- Ordered list with embedded unordered lists -->
+                <ol class="topic-list">
+                    <li>Microeconomics
+                        <ul>
+                            <li>Supply, demand, and market equilibrium</li>
+                            <li>Elasticity and consumer behavior</li>
+                            <li>Firm competition: perfect competition, monopoly, oligopoly</li>
+                            <li>Game theory and strategic interaction</li>
+                        </ul>
+                    </li>
+                    <li>Macroeconomics
+                        <ul>
+                            <li>GDP, inflation, and unemployment</li>
+                            <li>Monetary policy and central banking</li>
+                            <li>Fiscal policy and government spending</li>
+                            <li>Business cycles and recessions</li>
+                        </ul>
+                    </li>
+                    <li>Applied &amp; Empirical Economics
+                        <ul>
+                            <li>Housing markets and real estate economics</li>
+                            <li>Labor markets and wage determination</li>
+                            <li>Causal inference — how we know what causes what</li>
+                            <li>Reading and understanding economic data</li>
+                        </ul>
+                    </li>
+                    <li>Industrial Organization
+                        <ul>
+                            <li>How firms compete in markets with few players</li>
+                            <li>Entry strategy and market structure</li>
+                            <li>Pricing strategies and product differentiation</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- YouTube Video -->
+        <div class="section-block" id="video">
+            <h2 class="section-title">Watch an Episode</h2>
+            <hr class="section-rule">
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/SaCvsf8uAQI"
+                    title="Doggonomics Episode"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="img-caption" style="margin-top:0.75rem">Check out more episodes on the <a href="https://www.youtube.com/@doggonomics" target="_blank" style="color:#ff4444">Doggonomics channel →</a></p>
+        </div>
+
+        <!-- Tableau Embed -->
+        <div class="section-block" id="data">
+            <h2 class="section-title">Economics by the Numbers</h2>
+            <hr class="section-rule">
+            <p style="color:var(--muted);font-size:0.93rem;margin-bottom:0.5rem;font-family:'Merriweather Sans',sans-serif">Data is the language of economics. This interactive Tableau visualization explores U.S. GDP growth over time — a core macroeconomic concept covered on the channel.</p>
+            <div class="tableau-wrapper">
+                <div class='tableauPlaceholder' style='width:100%;height:500px'>
+                    <noscript>
+                        <a href='https://public.tableau.com'>
+                            <img alt='Economics Dashboard' src='https://public.tableau.com/static/images/1_rss.png' style='border:none'/>
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/>
+                        <param name='embed_code_version' value='3'/>
+                        <param name='site_root' value=''/>
+                        <param name='name' value='USEconomicIndicators_17009012345/GDPDashboard'/>
+                        <param name='tabs' value='no'/>
+                        <param name='toolbar' value='yes'/>
+                        <param name='animate_transition' value='yes'/>
+                        <param name='display_static_image' value='yes'/>
+                        <param name='display_spinner' value='yes'/>
+                        <param name='display_overlay' value='yes'/>
+                        <param name='display_count' value='yes'/>
+                        <param name='language' value='en-US'/>
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var vizElement = document.querySelector('.tableauPlaceholder object');
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '500px';
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+            <p style="font-size:0.8rem;color:var(--muted);font-family:'Merriweather Sans',sans-serif;margin-top:0.5rem;text-align:center">
+                Note: Tableau visualizations require an internet connection and may take a moment to load.
+                If you need to swap in a different public Tableau viz, update the <code>name</code> parameter above.
+            </p>
+        </div>
+
+        <!-- Mini App Link -->
+        <div class="section-block" id="app">
+            <h2 class="section-title">Try Inflation Survivor</h2>
+            <hr class="section-rule">
+            <div class="app-promo">
+                <p>I built an <strong>Inflation Survivor</strong> game — You play as a Wallet trying to survive endless waves of Inflation and Unexpected Bills. You automatically shoot "Investments" at them, and when they are defeated, they drop "Dividends" (XP) which you collect to level up and shoot faster.</p>
+                <a href="game.html" class="btn-red">Launch the App →</a>
+            </div>
+        </div>
+
+        <a href="#about" class="back-top">↑ Return to the top of the page</a>
+    </div>
+
+    <!-- ===== Footer div ===== -->
+    <div id="footer">
+        Steven Wood &nbsp;|&nbsp; &copy; 2026 &nbsp;|&nbsp;
+        <a href="https://www.youtube.com/@doggonomics" target="_blank">Doggonomics</a> &nbsp;|&nbsp;
+        <a href="https://www.linkedin.com/in/stevenhwood" target="_blank">LinkedIn</a> &nbsp;|&nbsp;
+        <a href="index.html">Professional Portfolio</a>
+    </div>
+
+</body>
+</html>

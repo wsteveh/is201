@@ -1,0 +1,298 @@
+/* scratch.css — Doggonomics Passion Page */
+/* No Bootstrap. All custom. */
+
+/* ===== 1. CSS Variables ===== */
+:root {
+    --dark:     #0e0e10;
+    --card:     #18181c;
+    --card2:    #222228;
+    --border:   #2e2e38;
+    --red:      #e63946;
+    --red-dim:  #b82d39;
+    --gold:     #f4c430;
+    --text:     #e8e6e1;
+    --muted:    #888898;
+    --light-bg: #f5f4f0;
+}
+
+/* ===== 2. Base — font-family + font color + background ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Merriweather', Georgia, serif;
+    background-color: var(--dark);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+/* ===== 3. Nav div ===== */
+#top-nav {
+    background-color: #09090b;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+}
+
+#top-nav .nav-brand {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    color: var(--red);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+}
+
+#top-nav .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+}
+
+#top-nav .nav-links a:hover {
+    color: var(--text);
+}
+
+/* ===== 4. Hero div ===== */
+#hero {
+    background-color: #09090b;
+    background-image:
+        radial-gradient(ellipse at 70% 50%, rgba(230, 57, 70, 0.18) 0%, transparent 65%),
+        radial-gradient(ellipse at 20% 80%, rgba(244, 196, 48, 0.08) 0%, transparent 55%);
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+#hero .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#hero .channel-label {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.25em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+#hero h1 {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: 4.5rem;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+#hero h1 span {
+    color: var(--red);
+}
+
+#hero p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 300;
+}
+
+.btn-red {
+    display: inline-block;
+    background-color: var(--red);
+    color: white;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    padding: 0.7rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-red:hover {
+    background-color: var(--red-dim);
+}
+
+/* ===== 5. Main content div ===== */
+#content {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 5rem;
+}
+
+/* ===== 6. Section headings ===== */
+.section-title {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.section-rule {
+    height: 3px;
+    background: linear-gradient(to right, var(--red), transparent);
+    border: none;
+    margin: 0.5rem 0 1.5rem;
+}
+
+.section-block {
+    margin-bottom: 4rem;
+}
+
+/* ===== 7. Content cards ===== */
+.content-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-top: 1.25rem;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+/* ===== 8. Ordered + unordered lists ===== */
+ol.topic-list {
+    padding-left: 1.4rem;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+ol.topic-list > li {
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+}
+
+ol.topic-list ul {
+    list-style-type: disc;
+    padding-left: 1.4rem;
+    margin-top: 0.4rem;
+}
+
+ol.topic-list ul li {
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    font-size: 0.93rem;
+}
+
+/* ===== 9. Channel image ===== */
+.channel-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    display: block;
+    margin-top: 1.25rem;
+}
+
+.img-caption {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+/* ===== 10. Video wrapper ===== */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-top: 1.25rem;
+    border: 2px solid var(--border);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+}
+
+/* ===== 11. Tableau wrapper ===== */
+.tableau-wrapper {
+    margin-top: 1.25rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    background: white;
+}
+
+/* ===== 12. Anchor jump link ===== */
+.jump-link {
+    display: inline-block;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+}
+.jump-link:hover { color: var(--red); }
+
+/* ===== 13. App promo card ===== */
+.app-promo {
+    background: linear-gradient(135deg, #1a1020, #1a0a0a);
+    border: 1px solid var(--red-dim);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.25rem;
+}
+
+.app-promo p {
+    font-family: 'Merriweather Sans', sans-serif;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* ===== 14. Back to top ===== */
+.back-top {
+    display: block;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: 'Merriweather Sans', sans-serif;
+    text-decoration: none;
+    margin-top: 2rem;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+}
+.back-top:hover { color: var(--red); }
+
+/* ===== 15. Footer div ===== */
+#footer {
+    background-color: #09090b;
+    color: var(--muted);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+#footer a { color: var(--red); text-decoration: none; }
+#footer a:hover { text-decoration: underline; }
