@@ -12,7 +12,7 @@
             --dark: #0e0e10;
             --card: #18181c;
             --border: #2e2e38;
-            --red: #e63946;
+            --red: #ff4d4d;
             --gold: #f4c430;
             --green: #4caf7d;
             --text: #e8e6e1;
@@ -26,7 +26,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevent scrolling while playing */
+            overflow: hidden;
         }
 
         /* ===== Top Nav ===== */
@@ -54,7 +54,7 @@
         }
 
         canvas {
-            background: var(--card);
+            background: #121418; 
             border: 2px solid var(--border);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -77,13 +77,17 @@
         }
 
         .stat-box {
-            background: rgba(24, 24, 28, 0.8);
+            background: rgba(24, 24, 28, 0.85);
             border: 1px solid var(--border);
             padding: 0.5rem 1rem;
             border-radius: 6px;
             font-weight: bold;
             letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
+
+        .stat-box span { font-size: 1.1rem; }
 
         .xp-bar-container {
             position: absolute;
@@ -92,7 +96,7 @@
             transform: translateX(-50%);
             width: 760px;
             max-width: 90%;
-            height: 10px;
+            height: 12px;
             background: var(--dark);
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -103,15 +107,28 @@
         .xp-bar-fill {
             height: 100%;
             width: 0%;
-            background: var(--gold);
+            background: linear-gradient(90deg, #b8860b, var(--gold));
             transition: width 0.2s;
+        }
+
+        .level-up-text {
+            position: absolute;
+            top: 20%;
+            color: var(--gold);
+            font-size: 2rem;
+            font-weight: 900;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 15;
         }
 
         /* ===== Game Over Screen ===== */
         .overlay-screen {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(14, 14, 16, 0.85);
+            background: rgba(14, 14, 16, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -121,15 +138,19 @@
         }
 
         .overlay-screen h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             color: var(--red);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
         }
 
         .overlay-screen p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             color: var(--muted);
+            text-align: center;
+            line-height: 1.6;
         }
 
         .btn {
@@ -141,7 +162,7 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: transform 0.1s, background 0.2s;
         }
         .btn:hover { background: #5cdb99; }
         .btn:active { transform: scale(0.95); }
@@ -159,17 +180,22 @@
     <div class="xp-bar-container"><div class="xp-bar-fill" id="xp-bar"></div></div>
     
     <div class="ui-layer">
-        <div class="stat-box" style="color: var(--green);">Level: <span id="ui-level">1</span></div>
-        <div class="stat-box" style="color: var(--text);">Time: <span id="ui-time">0:00</span></div>
-        <div class="stat-box" style="color: var(--red);">HP: <span id="ui-hp">100</span>/100</div>
+        <div class="stat-box" style="color: var(--gold);">Portfolio Level: <span id="ui-level">1</span></div>
+        <div class="stat-box" style="color: var(--text);">Fiscal Year: <span id="ui-time">0:00</span></div>
+        <div class="stat-box" style="color: var(--green);">Funds: $<span id="ui-hp">1000</span></div>
     </div>
+
+    <!-- UI Toasts -->
+    <div id="level-up-toast" class="level-up-text">📈 Compound Interest Applied!</div>
+    <div id="boss-toast" class="level-up-text" style="color: var(--red); top: 30%; font-size: 2.5rem; text-shadow: 0 4px 20px rgba(230, 57, 70, 0.9);">⚠️ BEAR MARKET DETECTED ⚠️</div>
+    <div id="bull-toast" class="level-up-text" style="color: var(--green); top: 35%; font-size: 2.5rem; text-shadow: 0 4px 20px rgba(76, 175, 125, 0.9);">🚀 BULL MARKET! CATCH IT! 🚀</div>
 
     <canvas id="gameCanvas" width="800" height="600"></canvas>
 
     <div class="overlay-screen" id="game-over">
         <h1>BANKRUPT</h1>
-        <p>You survived <span id="final-time" style="color:var(--text)">0:00</span> and reached Level <span id="final-level" style="color:var(--gold)">1</span>.</p>
-        <button class="btn" onclick="startGame()">Restart Game</button>
+        <p>Your wallet succumbed to endless inflation.<br>You survived <span id="final-time" style="color:var(--text)">0:00</span> and built a Portfolio Level of <span id="final-level" style="color:var(--gold)">1</span>.</p>
+        <button class="btn" onclick="startGame()">Bailout (Restart)</button>
     </div>
 </div>
 
@@ -185,10 +211,12 @@
     const gameOverScreen = document.getElementById('game-over');
     const finalTime = document.getElementById('final-time');
     const finalLevel = document.getElementById('final-level');
+    const levelUpToast = document.getElementById('level-up-toast');
+    const bossToast = document.getElementById('boss-toast');
+    const bullToast = document.getElementById('bull-toast');
 
     // Input tracking
     const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false };
-    
     window.addEventListener('keydown', e => { if(keys.hasOwnProperty(e.key)) keys[e.key] = true; });
     window.addEventListener('keyup', e => { if(keys.hasOwnProperty(e.key)) keys[e.key] = false; });
 
@@ -197,39 +225,37 @@
     let frameCount = 0;
     let isGameOver = false;
     let startTime = 0;
+    let lastBossLevel = 0;
 
-    let player, enemies, projectiles, gems, particles;
+    let player, enemies, projectiles, gems, particles, floatingTexts;
 
     class Player {
         constructor() {
             this.x = canvas.width / 2;
             this.y = canvas.height / 2;
-            this.size = 15;
+            this.size = 18; 
             this.speed = 3.5;
-            this.maxHp = 100;
-            this.hp = 100;
+            this.maxHp = 1000;
+            this.hp = 1000;
             
             this.level = 1;
             this.xp = 0;
             this.xpNeeded = 10;
             
-            // Attack stats
-            this.fireRate = 60; // shoots every X frames
-            this.projectileSpeed = 7;
-            this.damage = 25;
+            this.fireRate = 50; 
+            this.projectileSpeed = 8;
+            this.damage = 30;
             this.attackTimer = 0;
-            this.pickupRadius = 60;
+            this.pickupRadius = 75;
         }
 
         update() {
-            // Movement
             let dx = 0; let dy = 0;
             if (keys.w || keys.ArrowUp) dy -= 1;
             if (keys.s || keys.ArrowDown) dy += 1;
             if (keys.a || keys.ArrowLeft) dx -= 1;
             if (keys.d || keys.ArrowRight) dx += 1;
 
-            // Normalize diagonal movement
             if (dx !== 0 && dy !== 0) {
                 const length = Math.sqrt(dx*dx + dy*dy);
                 dx /= length; dy /= length;
@@ -238,11 +264,9 @@
             this.x += dx * this.speed;
             this.y += dy * this.speed;
 
-            // Keep in bounds
             this.x = Math.max(this.size, Math.min(canvas.width - this.size, this.x));
             this.y = Math.max(this.size, Math.min(canvas.height - this.size, this.y));
 
-            // Auto Attack
             this.attackTimer++;
             if (this.attackTimer >= this.fireRate) {
                 this.shoot();
@@ -253,11 +277,13 @@
         shoot() {
             if (enemies.length === 0) return;
             
-            // Find nearest enemy
             let nearest = null;
             let minDist = Infinity;
             
             for (let enemy of enemies) {
+                // Prioritize shooting enemies on screen
+                if(enemy.x < 0 || enemy.x > canvas.width || enemy.y < 0 || enemy.y > canvas.height) continue;
+                
                 const dist = Math.hypot(enemy.x - this.x, enemy.y - this.y);
                 if (dist < minDist) {
                     minDist = dist;
@@ -269,49 +295,56 @@
                 const angle = Math.atan2(nearest.y - this.y, nearest.x - this.x);
                 projectiles.push(new Projectile(this.x, this.y, angle, this.projectileSpeed, this.damage));
                 
-                // At higher levels, shoot backwards too
-                if (this.level >= 5) {
-                    projectiles.push(new Projectile(this.x, this.y, angle + Math.PI, this.projectileSpeed, this.damage));
-                }
+                if (this.level >= 4) projectiles.push(new Projectile(this.x, this.y, angle + Math.PI, this.projectileSpeed, this.damage));
+                if (this.level >= 8) projectiles.push(new Projectile(this.x, this.y, angle + Math.PI/2, this.projectileSpeed, this.damage));
+                if (this.level >= 12) projectiles.push(new Projectile(this.x, this.y, angle - Math.PI/2, this.projectileSpeed, this.damage));
             }
         }
 
         gainXp(amount) {
             this.xp += amount;
-            if (this.xp >= this.xpNeeded) {
+            
+            while (this.xp >= this.xpNeeded) {
                 this.xp -= this.xpNeeded;
                 this.level++;
                 this.xpNeeded = Math.floor(this.xpNeeded * 1.5);
                 
-                // Level up perks
-                this.maxHp += 10;
-                this.hp = this.maxHp;
-                this.damage += 5;
-                if (this.fireRate > 15) this.fireRate -= 5;
+                this.maxHp += 50;
+                this.hp += this.maxHp * 0.25; 
+                if (this.hp > this.maxHp) this.hp = this.maxHp;
+                
+                this.damage += 8;
+                if (this.fireRate > 12) this.fireRate -= 4;
                 this.pickupRadius += 10;
                 
-                createParticles(this.x, this.y, '#f4c430', 30);
+                createParticles(this.x, this.y, '#f4c430', 40);
                 uiLevel.textContent = this.level;
+                
+                levelUpToast.style.opacity = 1;
+                setTimeout(() => levelUpToast.style.opacity = 0, 2000);
+
+                if (this.level % 5 === 0 && this.level !== 5 && lastBossLevel !== this.level) {
+                    lastBossLevel = this.level;
+                    spawnBoss();
+                }
             }
             updateUI();
         }
 
         takeDamage(amount) {
             this.hp -= amount;
+            floatingTexts.push(new FloatingText(this.x, this.y - 20, `-$${Math.floor(amount)}`, '#ff4d4d'));
+            uiHp.style.color = this.hp < this.maxHp * 0.3 ? 'var(--red)' : 'var(--green)';
             updateUI();
-            if (this.hp <= 0) {
-                endGame();
-            }
+            if (this.hp <= 0) endGame();
         }
 
         draw() {
-            ctx.fillStyle = '#4caf7d'; // Wallet green
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.font = '32px Arial';
+            ctx.fillText('👛', this.x, this.y); 
             
-            // Draw pickup radius faintly
-            ctx.strokeStyle = 'rgba(244, 196, 48, 0.1)';
+            ctx.strokeStyle = 'rgba(244, 196, 48, 0.15)';
+            ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.pickupRadius, 0, Math.PI * 2);
             ctx.stroke();
@@ -322,111 +355,163 @@
         constructor(x, y, type) {
             this.x = x;
             this.y = y;
-            this.size = type === 'tank' ? 18 : 12;
-            this.speed = type === 'fast' ? 2.5 : type === 'tank' ? 0.8 : 1.2;
-            this.hp = type === 'tank' ? 150 : 40;
-            this.damage = type === 'tank' ? 15 : 5;
-            this.color = type === 'fast' ? '#e89447' : '#e63946'; // Orange bills, Red inflation
+            this.type = type;
+            this.isBoss = false;
+
+            // Restored the scaling so the game actually pushes back!
+            const diffScale = 1; 
+            const dmgScale = 1;  
+            
+            if (type === 'boss') {
+                this.emoji = '🐻'; 
+                this.size = 45 * (1 + player.level / 50);
+                this.speed = 1.05 + (player.level * 0.02);
+                this.hp = 2000 * Math.pow(1.5, player.level / 5); 
+                this.damage = 300 * dmgScale;
+                this.isBoss = true;
+            } else if (type === 'bull') {
+                this.emoji = '🐂'; 
+                this.size = 35;
+                this.speed = 1.4; // Fast enough you have to chase it
+                this.hp = 3500 + (player.level * 100); 
+                this.damage = 0; // Bulls don't hurt you
+            } else if (type === 'guard') {
+                this.emoji = '💼'; // Regulators / Auditors
+                this.size = 20;
+                this.speed = 2.2; // Extremely fast to intercept you
+                this.hp = 500 * diffScale; 
+                this.damage = 80 * dmgScale;
+            } else if (type === 'tank') {
+                this.emoji = '📈'; 
+                this.size = 22;
+                this.speed = 0.9;
+                this.hp = 180 * diffScale;
+                this.damage = 150 * dmgScale;
+            } else if (type === 'fast') {
+                this.emoji = '🛒'; 
+                this.size = 14;
+                this.speed = 2.8;
+                this.hp = 30 * diffScale;
+                this.damage = 40 * dmgScale;
+            } else {
+                this.emoji = '🧾'; 
+                this.size = 16;
+                this.speed = 1.4;
+                this.hp = 50 * diffScale;
+                this.damage = 60 * dmgScale;
+            }
         }
 
         update() {
-            const angle = Math.atan2(player.y - this.y, player.x - this.x);
-            this.x += Math.cos(angle) * this.speed;
-            this.y += Math.sin(angle) * this.speed;
+            if (this.type === 'bull') {
+                // Bull ignores player and runs across the screen
+                this.x += this.vx;
+                this.y += this.vy;
 
-            // Check collision with player
-            const dist = Math.hypot(player.x - this.x, player.y - this.y);
-            if (dist < this.size + player.size) {
-                player.takeDamage(this.damage);
-                this.hp = 0; // Enemy dies on impact
+                // Despawn cleanly without dropping loot if it escapes bounds
+                if (this.x < -200 || this.x > canvas.width + 200 || this.y < -200 || this.y > canvas.height + 200) {
+                    this.hp = -999; 
+                }
+            } else {
+                // Normal enemies chase the player
+                const angle = Math.atan2(player.y - this.y, player.x - this.x);
+                this.x += Math.cos(angle) * this.speed;
+                this.y += Math.sin(angle) * this.speed;
+
+                const dist = Math.hypot(player.x - this.x, player.y - this.y);
+                if (dist < this.size + player.size - 5) { 
+                    player.takeDamage(this.damage);
+                    this.hp = 0; 
+                }
             }
         }
 
         draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.font = `${this.size * 2}px Arial`;
+            ctx.fillText(this.emoji, this.x, this.y);
         }
     }
 
     class Projectile {
         constructor(x, y, angle, speed, damage) {
-            this.x = x;
-            this.y = y;
+            this.x = x; this.y = y;
             this.vx = Math.cos(angle) * speed;
             this.vy = Math.sin(angle) * speed;
-            this.size = 4;
+            this.size = 10;
             this.damage = damage;
             this.life = 100;
         }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.life--;
-        }
-
+        update() { this.x += this.vx; this.y += this.vy; this.life--; }
         draw() {
-            ctx.fillStyle = '#e8e6e1';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.fillStyle = '#85bb65'; 
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('$', this.x, this.y);
         }
     }
 
     class Gem {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = 5;
-            this.value = 5;
+        constructor(x, y, value = 5) {
+            this.x = x; this.y = y;
+            this.size = value;
+            this.value = value;
             this.collected = false;
         }
 
         update() {
             const dist = Math.hypot(player.x - this.x, player.y - this.y);
-            
-            // Magnet effect
             if (dist < player.pickupRadius) {
                 const angle = Math.atan2(player.y - this.y, player.x - this.x);
-                this.x += Math.cos(angle) * 6;
-                this.y += Math.sin(angle) * 6;
+                this.x += Math.cos(angle) * 7;
+                this.y += Math.sin(angle) * 7;
             }
-
-            // Pickup
             if (dist < player.size + this.size) {
                 player.gainXp(this.value);
+                floatingTexts.push(new FloatingText(this.x, this.y, '+$', '#f4c430'));
                 this.collected = true;
             }
         }
 
         draw() {
-            ctx.fillStyle = '#f4c430'; // Gold
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.font = `${this.size * 1.6}px Arial`;
+            ctx.fillText('🪙', this.x, this.y);
+        }
+    }
+
+    class FloatingText {
+        constructor(x, y, text, color) {
+            this.x = x + (Math.random() * 20 - 10);
+            this.y = y;
+            this.text = text;
+            this.color = color;
+            this.life = 40;
+            this.vy = -0.8;
+        }
+        update() { this.y += this.vy; this.life--; }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = Math.max(0, this.life / 40);
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText(this.text, this.x, this.y);
+            ctx.globalAlpha = 1.0;
         }
     }
 
     class Particle {
         constructor(x, y, color) {
-            this.x = x;
-            this.y = y;
-            this.vx = (Math.random() - 0.5) * 6;
-            this.vy = (Math.random() - 0.5) * 6;
+            this.x = x; this.y = y;
+            this.vx = (Math.random() - 0.5) * 8;
+            this.vy = (Math.random() - 0.5) * 8;
             this.life = Math.random() * 20 + 10;
+            this.maxLife = this.life;
             this.color = color;
-            this.size = Math.random() * 3 + 1;
+            this.size = Math.random() * 4 + 2;
         }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.life--;
-        }
+        update() { this.x += this.vx; this.y += this.vy; this.life--; }
         draw() {
             ctx.fillStyle = this.color;
+            ctx.globalAlpha = Math.max(0, this.life / this.maxLife);
             ctx.fillRect(this.x, this.y, this.size, this.size);
+            ctx.globalAlpha = 1.0;
         }
     }
 
@@ -434,22 +519,62 @@
         for(let i=0; i<amount; i++) particles.push(new Particle(x, y, color));
     }
 
+    function spawnBoss() {
+        let x = Math.random() < 0.5 ? -60 : canvas.width + 60;
+        let y = Math.random() * canvas.height;
+        enemies.push(new Enemy(x, y, 'boss'));
+        
+        bossToast.style.opacity = 1;
+        setTimeout(() => bossToast.style.opacity = 0, 3500);
+    }
+
+    function spawnBullEvent() {
+        let startX, startY, targetX, targetY;
+        
+        // Pick a side to spawn, and aim towards the opposite side
+        if (Math.random() < 0.5) { 
+            startX = Math.random() < 0.5 ? -50 : canvas.width + 50;
+            startY = Math.random() * canvas.height;
+            targetX = startX < 0 ? canvas.width + 50 : -50;
+            targetY = Math.random() * canvas.height;
+        } else { 
+            startX = Math.random() * canvas.width;
+            startY = Math.random() < 0.5 ? -50 : canvas.height + 50;
+            targetX = Math.random() * canvas.width;
+            targetY = startY < 0 ? canvas.height + 50 : -50;
+        }
+
+        let bull = new Enemy(startX, startY, 'bull');
+        const angle = Math.atan2(targetY - startY, targetX - startX);
+        bull.vx = Math.cos(angle) * 1.5; 
+        bull.vy = Math.sin(angle) * 1.5;
+        enemies.push(bull);
+
+        // Spawn Regulators acting as a wall around the Bull
+        for(let i=0; i<5; i++) {
+            let gx = startX + Math.cos((i/5) * Math.PI * 2) * 60;
+            let gy = startY + Math.sin((i/5) * Math.PI * 2) * 60;
+            enemies.push(new Enemy(gx, gy, 'guard'));
+        }
+
+        bullToast.style.opacity = 1;
+        setTimeout(() => bullToast.style.opacity = 0, 3500);
+    }
+
     function spawnEnemy() {
-        // Spawn slightly outside canvas
         let x, y;
         if (Math.random() < 0.5) {
-            x = Math.random() < 0.5 ? -30 : canvas.width + 30;
+            x = Math.random() < 0.5 ? -40 : canvas.width + 40;
             y = Math.random() * canvas.height;
         } else {
             x = Math.random() * canvas.width;
-            y = Math.random() < 0.5 ? -30 : canvas.height + 30;
+            y = Math.random() < 0.5 ? -40 : canvas.height + 40;
         }
 
-        // Difficulty scaling over time
         const r = Math.random();
         let type = 'normal';
-        if (frameCount > 600 && r < 0.2) type = 'fast';
-        if (frameCount > 1200 && r > 0.8) type = 'tank';
+        if (frameCount > 500 && r < 0.25) type = 'fast';
+        if (frameCount > 1000 && r > 0.8) type = 'tank';
 
         enemies.push(new Enemy(x, y, type));
     }
@@ -466,20 +591,39 @@
         return `${m}:${s.toString().padStart(2, '0')}`;
     }
 
+    function drawLedgerBackground() {
+        ctx.fillStyle = '#121418';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.strokeStyle = '#1e2025';
+        ctx.lineWidth = 1;
+        for(let i = 0; i < canvas.width; i += 40) {
+            ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+        }
+        for(let i = 0; i < canvas.height; i += 40) {
+            ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
+        }
+        ctx.strokeStyle = 'rgba(230, 57, 70, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(80, 0); ctx.lineTo(80, canvas.height); ctx.stroke();
+    }
+
     function startGame() {
         player = new Player();
-        enemies = [];
-        projectiles = [];
-        gems = [];
-        particles = [];
-        frameCount = 0;
-        isGameOver = false;
-        startTime = Date.now();
+        enemies = []; projectiles = []; gems = []; particles = []; floatingTexts = [];
+        frameCount = 0; isGameOver = false; startTime = Date.now(); lastBossLevel = 0;
         
         gameOverScreen.style.display = 'none';
+        uiHp.style.color = 'var(--green)';
         uiLevel.textContent = player.level;
+        levelUpToast.style.opacity = 0;
+        bossToast.style.opacity = 0;
+        bullToast.style.opacity = 0;
         updateUI();
         
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
         if(gameLoop) cancelAnimationFrame(gameLoop);
         loop();
     }
@@ -495,75 +639,84 @@
     function loop() {
         if (isGameOver) return;
         
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawLedgerBackground();
         frameCount++;
 
-        // Timer
         uiTime.textContent = formatTime(Date.now() - startTime);
 
-        // Spawn logic (gets faster over time)
-        const spawnRate = Math.max(10, 60 - Math.floor(frameCount / 300));
+        // Spawn logic
+        const spawnRate = Math.max(8, 50 - Math.floor(frameCount / 250));
         if (frameCount % spawnRate === 0) spawnEnemy();
 
-        // Update & Draw Player
+        // Spawn Bull Market every ~15 seconds once past level 16
+        if (frameCount % 1800 === 0 && player.level >= 16) {
+            spawnBullEvent();
+        }
+
         player.update();
         player.draw();
 
-        // Projectiles
-        for (let i = projectiles.length - 1; i >= 0; i--) {
-            let p = projectiles[i];
-            p.update();
-            p.draw();
-            if (p.life <= 0 || p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
-                projectiles.splice(i, 1);
-            }
-        }
-
-        // Gems
-        for (let i = gems.length - 1; i >= 0; i--) {
-            let g = gems[i];
-            g.update();
-            g.draw();
-            if (g.collected) gems.splice(i, 1);
-        }
-
-        // Enemies & Collisions
-        for (let i = enemies.length - 1; i >= 0; i--) {
-            let e = enemies[i];
-            e.update();
-            e.draw();
-
-            // Check if hit by projectile
-            for (let j = projectiles.length - 1; j >= 0; j--) {
-                let p = projectiles[j];
-                const dist = Math.hypot(e.x - p.x, e.y - p.y);
-                if (dist < e.size + p.size) {
-                    e.hp -= p.damage;
-                    createParticles(p.x, p.y, '#e8e6e1', 5);
-                    projectiles.splice(j, 1);
-                    break;
+        const entities = [
+            { arr: projectiles, action: (p, i) => {
+                p.update(); p.draw();
+                if (p.life <= 0 || p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) projectiles.splice(i, 1);
+            }},
+            { arr: gems, action: (g, i) => {
+                g.update(); g.draw();
+                if (g.collected) gems.splice(i, 1);
+            }},
+            { arr: enemies, action: (e, i) => {
+                e.update(); e.draw();
+                
+                // Projectile Collision
+                for (let j = projectiles.length - 1; j >= 0; j--) {
+                    let p = projectiles[j];
+                    if (Math.hypot(e.x - p.x, e.y - p.y) < e.size + p.size) {
+                        e.hp -= p.damage;
+                        createParticles(p.x, p.y, '#e8e6e1', 5);
+                        floatingTexts.push(new FloatingText(e.x, e.y, p.damage, '#fff'));
+                        projectiles.splice(j, 1);
+                        break;
+                    }
                 }
-            }
 
-            if (e.hp <= 0) {
-                createParticles(e.x, e.y, e.color, 15);
-                gems.push(new Gem(e.x, e.y));
-                enemies.splice(i, 1);
-            }
-        }
+                // Death Logic
+                if (e.hp <= 0) {
+                    // If hp is -999, it escaped bounds cleanly, no loot
+                    if (e.hp !== -999) {
+                        createParticles(e.x, e.y, '#888', e.isBoss ? 50 : 10);
+                        
+                        if (e.isBoss) {
+                            for(let k = 0; k < 25; k++) {
+                                let gx = e.x + (Math.random() * 80 - 40);
+                                let gy = e.y + (Math.random() * 80 - 40);
+                                gems.push(new Gem(gx, gy, 15*(1+player.level/25)));
+                            }
+                        } else if (e.type === 'bull') {
+                            // Bull detonates into a massive pile of gems
+                            for(let k = 0; k < 40; k++) {
+                                let gx = e.x + (Math.random() * 120 - 60);
+                                let gy = e.y + (Math.random() * 120 - 60);
+                                gems.push(new Gem(gx, gy, 25*(1+player.level/8)));
+                            }
+                        } else {
+                            gems.push(new Gem(e.x, e.y, 5*(1+player.level/40)));
+                        }
+                    }
+                    enemies.splice(i, 1);
+                }
+            }},
+            { arr: particles, action: (pt, i) => { pt.update(); pt.draw(); if (pt.life <= 0) particles.splice(i, 1); }},
+            { arr: floatingTexts, action: (ft, i) => { ft.update(); ft.draw(); if (ft.life <= 0) floatingTexts.splice(i, 1); }}
+        ];
 
-        // Particles
-        for (let i = particles.length - 1; i >= 0; i--) {
-            let pt = particles[i];
-            pt.update();
-            pt.draw();
-            if (pt.life <= 0) particles.splice(i, 1);
-        }
+        entities.forEach(group => {
+            for (let i = group.arr.length - 1; i >= 0; i--) group.action(group.arr[i], i);
+        });
 
         gameLoop = requestAnimationFrame(loop);
     }
 
-    // Start
     startGame();
 </script>
 
